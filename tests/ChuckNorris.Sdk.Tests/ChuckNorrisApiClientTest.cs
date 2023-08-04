@@ -21,7 +21,7 @@ public class ChuckNorrisApiClientTest
         var chuckJoke = await _client.GetRandomChuckJokeAsync();
 
         chuckJoke.Categories.Should().BeEmpty();
-        chuckJoke.CreateadAt.Should().NotBeNullOrWhiteSpace();
+        chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
         chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
         chuckJoke.UpdatedAt.Should().NotBeNullOrWhiteSpace();
@@ -34,13 +34,21 @@ public class ChuckNorrisApiClientTest
     {
         var chuckJoke = await _client.GetChuckJokeByCategoryAsync("dev");
 
-        chuckJoke.Categories.Should().NotBeEmpty();
-        chuckJoke.CreateadAt.Should().NotBeNullOrWhiteSpace();
+        chuckJoke!.Categories.Should().NotBeEmpty();
+        chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
         chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
         chuckJoke.UpdatedAt.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Url.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Value.Should().NotBeNullOrWhiteSpace();
+    }
+    
+    [Fact]
+    public async void GetChuckJokeByCategoryAsync_WithInValidCategory_ShouldReturnChuckJoke()
+    {
+        var chuckJoke = await _client.GetChuckJokeByCategoryAsync("guille");
+
+        chuckJoke.Should().BeNull();
     }
     
     [Fact]
@@ -52,7 +60,7 @@ public class ChuckNorrisApiClientTest
 
         foreach (var chuckJoke in response.Result)
         {
-            chuckJoke.CreateadAt.Should().NotBeNullOrWhiteSpace();
+            chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
             chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
             chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
             chuckJoke.UpdatedAt.Should().NotBeNullOrWhiteSpace();
@@ -70,7 +78,7 @@ public class ChuckNorrisApiClientTest
 
         foreach (var chuckJoke in response.Result)
         {
-            chuckJoke.CreateadAt.Should().NotBeNullOrWhiteSpace();
+            chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
             chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
             chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
             chuckJoke.UpdatedAt.Should().NotBeNullOrWhiteSpace();

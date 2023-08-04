@@ -21,12 +21,14 @@ public class ChuckNorrisApiClient : IChuckNorrisApiClient, IDisposable
         return (await _client.GetJsonAsync<ChuckJoke>("random", cancellationToken))!;
     }
 
-    public async Task<ChuckJoke> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default)
+    public async Task<ChuckJoke?> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default)
     {
         var request = new RestRequest("random");
         request.AddQueryParameter("category", category);
-        
-        return (await _client.GetAsync<ChuckJoke>(request, cancellationToken))!;
+
+        var chuckJoke = (await _client.GetAsync<ChuckJoke>(request, cancellationToken))!;
+
+        return string.IsNullOrEmpty(chuckJoke.Value) ? null : chuckJoke;
     }
 
     public async Task<TextSearchResponse> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default)
