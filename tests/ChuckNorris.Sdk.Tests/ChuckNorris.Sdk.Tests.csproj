@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\ChuckNorris.Sdk.Infrastructure\ChuckNorris.Sdk.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\src\ChuckNorris.Sdk\ChuckNorris.Sdk.csproj" />
     </ItemGroup>
 
 </Project>

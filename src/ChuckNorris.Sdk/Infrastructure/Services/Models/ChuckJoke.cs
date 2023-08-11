@@ -1,7 +1,8 @@
 ﻿using System.Text.Json.Serialization;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace ChuckNorris.Sdk.Infrastructure;
+namespace ChuckNorris.Sdk.Infrastructure.Services.Models;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public record ChuckJoke {
