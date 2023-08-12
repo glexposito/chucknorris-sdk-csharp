@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChuckNorris.Sdk.Infrastructure", "src\ChuckNorris.Sdk.Infrastructure\ChuckNorris.Sdk.Infrastructure.csproj", "{F52892E1-73FE-47E9-95E1-2424D97E2D0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChuckNorris.Sdk", "src\ChuckNorris.Sdk\ChuckNorris.Sdk.csproj", "{F52892E1-73FE-47E9-95E1-2424D97E2D0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChuckNorris.Sdk.Tests", "tests\ChuckNorris.Sdk.Tests\ChuckNorris.Sdk.Tests.csproj", "{7CE16E72-35DF-47BD-8BD6-A0D1C59965DC}"
 EndProject

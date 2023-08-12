@@ -5,7 +5,7 @@ namespace ChuckNorris.Sdk.Tests;
 
 public class ChuckNorrisApiClientTest
 {
-    private readonly ChuckNorrisApiClient _client = new();
+    private readonly ChuckNorrisApiClient _client = new(new HttpClient() { BaseAddress = new Uri("https://api.chucknorris.io/jokes") });
 
     [Fact]
     public async void GetCategoriesAsync_ShouldReturnCategories()
@@ -34,7 +34,7 @@ public class ChuckNorrisApiClientTest
     {
         var chuckJoke = await _client.GetChuckJokeByCategoryAsync("dev");
 
-        chuckJoke!.Categories.Should().NotBeEmpty();
+        chuckJoke.Categories.Should().NotBeEmpty();
         chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
         chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
@@ -44,11 +44,13 @@ public class ChuckNorrisApiClientTest
     }
     
     [Fact]
-    public async void GetChuckJokeByCategoryAsync_WithInValidCategory_ShouldReturnChuckJoke()
+    public async void GetChuckJokeByCategoryAsync_WithInvalidCategory_ShouldThrowHttpRequestException_404_NotFound()
     {
-        var chuckJoke = await _client.GetChuckJokeByCategoryAsync("guille");
-
-        chuckJoke.Should().BeNull();
+        Func<Task> act = () =>  _client.GetChuckJokeByCategoryAsync("gu1ll3e");
+        
+        await act.Should()
+            .ThrowAsync<HttpRequestException>()
+            .WithMessage("Response status code does not indicate success: 404 (Not Found).");
     }
     
     [Fact]
