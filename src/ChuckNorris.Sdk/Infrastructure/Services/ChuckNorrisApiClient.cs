@@ -27,8 +27,7 @@ public class ChuckNorrisApiClient : IChuckNorrisApiClient, IDisposable
         return (await _client.GetFromJsonAsync<ChuckJoke>(_client.BaseAddress + $"/random?category={category}", cancellationToken))!;
     }
 
-    public async Task<TextSearchResult> SearchChuckJokeByTextAsync(string text,
-        CancellationToken cancellationToken = default)
+    public async Task<TextSearchResult> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default)
     {
         return (await _client.GetFromJsonAsync<TextSearchResult>(_client.BaseAddress + $"/search?query={text}", cancellationToken))!;
     }
