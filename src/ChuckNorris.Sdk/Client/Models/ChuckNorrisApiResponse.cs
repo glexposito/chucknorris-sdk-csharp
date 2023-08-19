@@ -1,3 +1,8 @@
 ﻿namespace ChuckNorris.Sdk.Client.Models;
 
-public record ChuckNorrisApiResponse<T>(bool Success, string? Error, T? Data);
+public abstract class ChuckNorrisApiResponse
+{
+    public bool Success { get; set; }
+
+    public string? Error { get; set; }
+}

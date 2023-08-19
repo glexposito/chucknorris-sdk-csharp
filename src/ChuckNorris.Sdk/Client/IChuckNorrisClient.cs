@@ -5,11 +5,11 @@ namespace ChuckNorris.Sdk.Client;
 
 public interface IChuckNorrisClient
 {
-    Task<ChuckNorrisApiResponse<IEnumerable<string>>> GetCategoriesAsync(CancellationToken cancellationToken = default);
+    Task<CategoriesResponse> GetCategoriesAsync(CancellationToken cancellationToken = default);
     
-    Task<ChuckNorrisApiResponse<ChuckJoke>> GetRandomChuckJokeAsync(CancellationToken cancellationToken = default);
+    Task<ChuckJokeResponse> GetRandomChuckJokeAsync(CancellationToken cancellationToken = default);
     
-    Task<ChuckNorrisApiResponse<ChuckJoke>> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default);
+    Task<ChuckJokeResponse> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default);
     
-    Task<ChuckNorrisApiResponse<TextSearchResult>> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default);
+    Task<SearchChuckJokeResponse> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default);
 }

@@ -15,7 +15,7 @@ public class ChuckNorrisClientTest
         
         response.Success.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
-        response.Data.Should().NotBeEmpty();
+        response.Categories.Should().NotBeEmpty();
     }
     
     [Fact]
@@ -25,13 +25,13 @@ public class ChuckNorrisClientTest
 
         response.Success.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
-        response.Data!.Categories.Should().BeEmpty();
-        response.Data!.CreatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.IconUrl.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Id.Should().NotBeNullOrWhiteSpace();
-        response.Data!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Url.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Value.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Categories.Should().BeEmpty();
+        response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.IconUrl.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Id.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Url.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Value.Should().NotBeNullOrWhiteSpace();
     }
     
     [Fact]
@@ -41,13 +41,13 @@ public class ChuckNorrisClientTest
     
         response.Success.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
-        response.Data!.Categories.Should().NotBeEmpty();
-        response.Data!.CreatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.IconUrl.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Id.Should().NotBeNullOrWhiteSpace();
-        response.Data!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Url.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Value.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Categories.Should().NotBeEmpty();
+        response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.IconUrl.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Id.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Url.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Value.Should().NotBeNullOrWhiteSpace();
     }
     
     [Fact]
@@ -57,7 +57,7 @@ public class ChuckNorrisClientTest
     
         response.Success.Should().BeFalse();
         response.Error.Should().Contain("404");
-        response.Data.Should().BeNull();
+        response.ChuckJoke.Should().BeNull();
     }
     
     [Fact]
@@ -68,13 +68,13 @@ public class ChuckNorrisClientTest
         response.Success.Should().BeTrue();
         response.Error.Should().BeNull();
         
-        response.Data!.Categories.Should().NotBeEmpty();
-        response.Data!.CreatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.IconUrl.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Id.Should().NotBeNullOrWhiteSpace();
-        response.Data!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Url.Should().NotBeNullOrWhiteSpace();
-        response.Data!.Value.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Categories.Should().NotBeEmpty();
+        response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.IconUrl.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Id.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.UpdatedAt.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Url.Should().NotBeNullOrWhiteSpace();
+        response.ChuckJoke!.Value.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]
@@ -82,16 +82,6 @@ public class ChuckNorrisClientTest
     {
         var response = await _client.SearchChuckJokeByTextAsync("gu1ll3e");
 
-        response.Data!.Total.Should().Be(0);
-
-        foreach (var chuckJoke in response.Data!.Result)
-        {
-            chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
-            chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
-            chuckJoke.Id.Should().NotBeNullOrWhiteSpace();
-            chuckJoke.UpdatedAt.Should().NotBeNullOrWhiteSpace();
-            chuckJoke.Url.Should().NotBeNullOrWhiteSpace();
-            chuckJoke.Value.Should().NotBeNullOrWhiteSpace();
-        }
+        response.TextSearchResult!.Total.Should().Be(0);
     }
 }

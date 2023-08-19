@@ -1,6 +1,5 @@
 ﻿using ChuckNorris.Sdk.Client.Models;
 using ChuckNorris.Sdk.Infrastructure.Services;
-using ChuckNorris.Sdk.Infrastructure.Services.Models;
 
 namespace ChuckNorris.Sdk.Client;
 
@@ -14,75 +13,95 @@ public class ChuckNorrisClient : IChuckNorrisClient
         _apiClient = apiClient;
     }
     
-    public async Task<ChuckNorrisApiResponse<IEnumerable<string>>> GetCategoriesAsync(CancellationToken cancellationToken = default)
+    public async Task<CategoriesResponse> GetCategoriesAsync(CancellationToken cancellationToken = default)
     {
+        var response = new CategoriesResponse();
+        
         try
         {
             var categories = await _apiClient.GetCategoriesAsync(cancellationToken);
-
-            return new ChuckNorrisApiResponse<IEnumerable<string>>(true, null, categories);
+            
+            response.Success = true;
+            response.Categories = categories;
         }
         catch (HttpRequestException e)
         {
-            return new ChuckNorrisApiResponse<IEnumerable<string>>(false, e.Message, null);
+            response.Error = e.Message;
         }
         catch (Exception)
         {
-            return new ChuckNorrisApiResponse<IEnumerable<string>>(false, UnknownError , null);
+            response.Error = UnknownError;
         }
+
+        return response;
     }
 
-    public async Task<ChuckNorrisApiResponse<ChuckJoke>> GetRandomChuckJokeAsync(CancellationToken cancellationToken = default)
+    public async Task<ChuckJokeResponse> GetRandomChuckJokeAsync(CancellationToken cancellationToken = default)
     {
+        var response = new ChuckJokeResponse();
+        
         try
         {
             var chuckJoke = await _apiClient.GetRandomChuckJokeAsync(cancellationToken);
         
-            return new ChuckNorrisApiResponse<ChuckJoke>(true, null, chuckJoke);
+            response.Success = true;
+            response.ChuckJoke = chuckJoke;
         }
         catch (HttpRequestException e)
         {
-            return new ChuckNorrisApiResponse<ChuckJoke>(false, e.Message, null);
+            response.Error = e.Message;
         }
         catch (Exception)
         {
-            return new ChuckNorrisApiResponse<ChuckJoke>(false, UnknownError, null);
+            response.Error = UnknownError;
         }
+        
+        return response;
     }
 
-    public async Task<ChuckNorrisApiResponse<ChuckJoke>> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default)
+    public async Task<ChuckJokeResponse> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default)
     {
+        var response = new ChuckJokeResponse();
+        
         try
         {
             var chuckJoke = await _apiClient.GetChuckJokeByCategoryAsync(category, cancellationToken);
         
-            return new ChuckNorrisApiResponse<ChuckJoke>(true, null, chuckJoke);
+            response.Success = true;
+            response.ChuckJoke = chuckJoke;
         }
         catch (HttpRequestException e)
         {
-            return new ChuckNorrisApiResponse<ChuckJoke>(false, e.Message, null);
+            response.Error = e.Message;
         }
         catch (Exception)
         {
-            return new ChuckNorrisApiResponse<ChuckJoke>(false, UnknownError, null);
+            response.Error = UnknownError;
         }
+        
+        return response;
     }
 
-    public async Task<ChuckNorrisApiResponse<TextSearchResult>> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default)
+    public async Task<SearchChuckJokeResponse> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default)
     {
+        var response = new SearchChuckJokeResponse();
+        
         try
         {
             var searchResult = await _apiClient.SearchChuckJokeByTextAsync(text, cancellationToken);
         
-            return new ChuckNorrisApiResponse<TextSearchResult>(true, null, searchResult);
+            response.Success = true;
+            response.TextSearchResult = searchResult;
         }
         catch (HttpRequestException e)
         {
-            return new ChuckNorrisApiResponse<TextSearchResult>(false, e.Message, null);
+            response.Error = e.Message;
         }
         catch (Exception)
         {
-            return new ChuckNorrisApiResponse<TextSearchResult>(false, UnknownError, null);
+            response.Error = UnknownError;
         }
+        
+        return response;
     }
 }
