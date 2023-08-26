@@ -5,7 +5,7 @@ namespace ChuckNorris.Sdk.Tests;
 
 public class ChuckNorrisApiClientTest
 {
-    private readonly ChuckNorrisApiClient _client = new(new HttpClient() { BaseAddress = new Uri("https://api.chucknorris.io/jokes") });
+    private readonly ChuckNorrisApiClient _client = new(new HttpClient { BaseAddress = new Uri("https://api.chucknorris.io/jokes") });
 
     [Fact]
     public async void GetCategoriesAsync_ShouldReturnCategories()

@@ -21,7 +21,7 @@ public class ChuckNorrisClient : IChuckNorrisClient
         {
             var categories = await _apiClient.GetCategoriesAsync(cancellationToken);
             
-            response.Success = true;
+            response.IsSuccessful = true;
             response.Categories = categories;
         }
         catch (HttpRequestException e)
@@ -44,7 +44,7 @@ public class ChuckNorrisClient : IChuckNorrisClient
         {
             var chuckJoke = await _apiClient.GetRandomChuckJokeAsync(cancellationToken);
         
-            response.Success = true;
+            response.IsSuccessful = true;
             response.ChuckJoke = chuckJoke;
         }
         catch (HttpRequestException e)
@@ -67,7 +67,7 @@ public class ChuckNorrisClient : IChuckNorrisClient
         {
             var chuckJoke = await _apiClient.GetChuckJokeByCategoryAsync(category, cancellationToken);
         
-            response.Success = true;
+            response.IsSuccessful = true;
             response.ChuckJoke = chuckJoke;
         }
         catch (HttpRequestException e)
@@ -90,7 +90,7 @@ public class ChuckNorrisClient : IChuckNorrisClient
         {
             var searchResult = await _apiClient.SearchChuckJokeByTextAsync(text, cancellationToken);
         
-            response.Success = true;
+            response.IsSuccessful = true;
             response.TextSearchResult = searchResult;
         }
         catch (HttpRequestException e)

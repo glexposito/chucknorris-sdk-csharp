@@ -1,5 +1,4 @@
 ﻿using ChuckNorris.Sdk.Client.Models;
-using ChuckNorris.Sdk.Infrastructure.Services.Models;
 
 namespace ChuckNorris.Sdk.Client;
 
