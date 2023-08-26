@@ -1,19 +1,31 @@
 using ChuckNorris.Sdk.Client;
-using ChuckNorris.Sdk.Infrastructure.Services;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ChuckNorris.Sdk.Tests;
 
 public class ChuckNorrisClientTest
 {
-    private readonly ChuckNorrisClient _client = new(new ChuckNorrisApiClient(new HttpClient() { BaseAddress = new Uri("https://api.chucknorris.io/jokes") }));
-
+    private readonly IChuckNorrisClient _client;
+    
+    public ChuckNorrisClientTest()
+    {
+        var builder = Host.CreateApplicationBuilder();
+        builder.Services.AddChuckNorrisSdk();
+        using var host = builder.Build();
+        using var serviceScope = host.Services.CreateScope();
+        var provider = serviceScope.ServiceProvider;
+        
+        _client = provider.GetRequiredService<IChuckNorrisClient>();
+    }
+    
     [Fact]
     public async void GetCategoriesAsync_ShouldReturnResponse_WithCategories()
     {
         var response = await _client.GetCategoriesAsync();
         
-        response.Success.Should().BeTrue();
+        response.IsSuccessful.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
         response.Categories.Should().NotBeEmpty();
     }
@@ -23,7 +35,7 @@ public class ChuckNorrisClientTest
     {
         var response = await _client.GetRandomChuckJokeAsync();
 
-        response.Success.Should().BeTrue();
+        response.IsSuccessful.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
         response.ChuckJoke!.Categories.Should().BeEmpty();
         response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
@@ -39,7 +51,7 @@ public class ChuckNorrisClientTest
     {
         var response = await _client.GetChuckJokeByCategoryAsync("dev");
     
-        response.Success.Should().BeTrue();
+        response.IsSuccessful.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
         response.ChuckJoke!.Categories.Should().NotBeEmpty();
         response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
@@ -55,7 +67,7 @@ public class ChuckNorrisClientTest
     {
         var response = await _client.GetChuckJokeByCategoryAsync("gu1ll3e");
     
-        response.Success.Should().BeFalse();
+        response.IsSuccessful.Should().BeFalse();
         response.Error.Should().Contain("404");
         response.ChuckJoke.Should().BeNull();
     }
@@ -65,7 +77,7 @@ public class ChuckNorrisClientTest
     {
         var response = await _client.GetChuckJokeByCategoryAsync("dev");
     
-        response.Success.Should().BeTrue();
+        response.IsSuccessful.Should().BeTrue();
         response.Error.Should().BeNull();
         
         response.ChuckJoke!.Categories.Should().NotBeEmpty();

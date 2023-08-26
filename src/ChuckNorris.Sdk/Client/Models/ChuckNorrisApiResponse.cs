@@ -2,7 +2,7 @@
 
 public abstract class ChuckNorrisApiResponse
 {
-    public bool Success { get; set; }
+    public bool IsSuccessful { get; set; }
 
     public string? Error { get; set; }
 }
