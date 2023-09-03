@@ -13,6 +13,10 @@ public class ChuckNorrisClient : IChuckNorrisClient
         _apiClient = apiClient;
     }
     
+    /// <summary>
+    /// Retrieves a list of available categories in an asynchronous operation.
+    /// </summary>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     public async Task<CategoriesResponse> GetCategoriesAsync(CancellationToken cancellationToken = default)
     {
         var response = new CategoriesResponse();
@@ -35,7 +39,11 @@ public class ChuckNorrisClient : IChuckNorrisClient
 
         return response;
     }
-
+    
+    /// <summary>
+    /// Retrieves a random chuck joke in an asynchronous operation.
+    /// </summary>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     public async Task<ChuckJokeResponse> GetRandomChuckJokeAsync(CancellationToken cancellationToken = default)
     {
         var response = new ChuckJokeResponse();
@@ -59,6 +67,11 @@ public class ChuckNorrisClient : IChuckNorrisClient
         return response;
     }
 
+    /// <summary>
+    /// Retrieves a random chuck joke from a given category in an asynchronous operation.
+    /// </summary>
+    /// <param name="category">The category used to retrieve a chuck joke.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     public async Task<ChuckJokeResponse> GetChuckJokeByCategoryAsync(string category, CancellationToken cancellationToken = default)
     {
         var response = new ChuckJokeResponse();
@@ -82,6 +95,11 @@ public class ChuckNorrisClient : IChuckNorrisClient
         return response;
     }
 
+    /// <summary>
+    /// Free text search in an asynchronous operation.
+    /// </summary>
+    /// <param name="text">The text used to search for chuck jokes.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
     public async Task<SearchChuckJokeResponse> SearchChuckJokeByTextAsync(string text, CancellationToken cancellationToken = default)
     {
         var response = new SearchChuckJokeResponse();

@@ -6,7 +6,7 @@ namespace ChuckNorris.Sdk;
 
 public static class ChuckNorrisSdkExtensions
 {
-    public static void AddChuckNorrisSdk(this IServiceCollection services)
+    public static IServiceCollection AddChuckNorrisSdk(this IServiceCollection services)
     {
         services.AddHttpClient<IChuckNorrisApiClient, ChuckNorrisApiClient>(client =>
         {
@@ -14,5 +14,7 @@ public static class ChuckNorrisSdkExtensions
         });
         
         services.AddSingleton<IChuckNorrisClient, ChuckNorrisClient>();
+
+        return services;
     }
 }
