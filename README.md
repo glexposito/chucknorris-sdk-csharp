@@ -1,6 +1,6 @@
 # ChuckNorris SDK - (work in progress)
 
-![Build status](https://github.com/glexposito/chucknorris-sdk-csharp/workflows/ci.yml/badge.svg?branch=master)
+![Build status](https://github.com/glexposito/chucknorris-sdk-csharp/actions/workflows/ci.yml/badge.svg?branch=master)
 
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
