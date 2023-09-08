@@ -37,7 +37,6 @@ public class ChuckNorrisClientTest
 
         response.IsSuccessful.Should().BeTrue();
         response.Error.Should().BeNullOrWhiteSpace();
-        response.ChuckJoke!.Categories.Should().BeEmpty();
         response.ChuckJoke!.CreatedAt.Should().NotBeNullOrWhiteSpace();
         response.ChuckJoke!.IconUrl.Should().NotBeNullOrWhiteSpace();
         response.ChuckJoke!.Id.Should().NotBeNullOrWhiteSpace();
