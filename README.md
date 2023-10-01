@@ -2,6 +2,10 @@
 
 ![Build status](https://github.com/glexposito/chucknorris-sdk-csharp/actions/workflows/ci.yml/badge.svg?branch=master)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/glexposito/chucknorris-sdk-csharp/master/chuck-icon.png" />
+</p>
+
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
 ## Usage examples (work in progress)
@@ -49,6 +53,6 @@ Also include any other information you think is relevant to reproduce the proble
 
 ## Copyright and License
 
-Copyright 2023 Guillermo Exposito
+Copyright (c) Guillermo Exposito 2023
 
-Licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md)
+Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)

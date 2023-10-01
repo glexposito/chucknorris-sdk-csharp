@@ -12,6 +12,7 @@
         <Authors>Guillermo Exposito</Authors>
         <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
         <PackageIcon>chuck-icon.png</PackageIcon>
+        <Copyright>Copyright (c) Guillermo Exposito 2023</Copyright>
     </PropertyGroup>
 
 
