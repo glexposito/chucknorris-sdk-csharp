@@ -30,6 +30,6 @@ jobs:
 
     - name: Publish NuGet package
       run: |
-        cd .\src\ChuckNorris.Sdk\bin\Release\
+        cd ./src/ChuckNorris.Sdk/bin/Release
         VAR="$(ls | grep 'nupkg')"
         dotnet nuget push $VAR --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
