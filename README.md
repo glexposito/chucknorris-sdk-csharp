@@ -6,8 +6,6 @@
 
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
-- [Source code](https://github.com/glexposito/chucknorris-sdk-csharp)
-
 ## Supported Platforms
 
 * .NET 7 or greater
@@ -36,6 +34,7 @@ builder.Services.AddChuckNorrisSdk();
 Get a random chuck joke.
 
 ```c#
+using System.Net;
 using ChuckNorris.Sdk.Client;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,7 +61,14 @@ public class ChuckNorrisController : ControllerBase
             return Ok(response.ChuckJoke!.Value);
         }
 
-        return NotFound();
+        var problemDetails = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.BadGateway,
+            Title = "Downstream call failed",
+            Detail = "An error occurred while calling https://api.chucknorris.io API."
+        };
+
+        return new ObjectResult(problemDetails);
     }
 }
 ```
@@ -96,7 +102,7 @@ var result = response.TextSearchResult!.Result;
 
 foreach (var joke in result)
 {
-    Console.WriteLine(joke);
+    Console.WriteLine(joke.Value);
 }
 ```
 
