@@ -1,4 +1,4 @@
-# ChuckNorris SDK - (work in progress)
+# ChuckNorris SDK
 
 ![Build status](https://github.com/glexposito/chucknorris-sdk-csharp/actions/workflows/ci.yml/badge.svg?branch=master)
 
@@ -22,7 +22,7 @@ Package Manager:
 
 	>dotnet add package ChuckNorris.Sdk 
 
-Add Chuck Norris Sdk to the container
+Add ChuckNorris C# SDK to the container
 ```c#
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,9 +53,14 @@ public class ChuckNorrisController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetRandomJoke()
     {
-        var joke = await _client.GetRandomChuckJokeAsync();
+        var response = await _client.GetRandomChuckJokeAsync();
+        
+        if (response.IsSuccessful)
+        {
+            return Ok(response.ChuckJoke!.Value);
+        }
 
-        return Ok(joke.ChuckJoke!.Value) ;
+        return NotFound();
     }
 }
 ```
@@ -63,19 +68,34 @@ public class ChuckNorrisController : ControllerBase
 Get a list of available categories.
 
 ```c#
-var categories = await client.GetCategoriesAsync();
+var response = await _client.GetCategoriesAsync();
+
+var categories = response.Categories;
 ```
 
 Get a random chuck joke given a category.
 
 ```c#
-var joke = await client.GetChuckJokeByCategoryAsync(category);
+var response = await _client.GetChuckJokeByCategoryAsync("sport");
+
+var joke = response.ChuckJoke!.Value;
 ```
 
-Get chuck jokes by using free text search.
+Get chuck jokes by using full text search.
 
 ```c#
-var joke = await client.SearchChuckJokeByTextAsync(category);
+var response = await _client.SearchChuckJokeByTextAsync("dev");
+        
+var total = response.TextSearchResult!.Total;
+
+Console.WriteLine($"{total} chuck jokes found!");
+
+var result = response.TextSearchResult!.Result;
+
+foreach (var joke in result)
+{
+    Console.WriteLine(joke);
+}
 ```
 
 ## Contribute
