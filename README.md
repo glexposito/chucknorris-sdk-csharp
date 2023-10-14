@@ -2,9 +2,7 @@
 
 ![Build status](https://github.com/glexposito/chucknorris-sdk-csharp/actions/workflows/ci.yml/badge.svg?branch=master)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/glexposito/chucknorris-sdk-csharp/master/chuck-icon.png" />
-</p>
+![](https://raw.githubusercontent.com/glexposito/chucknorris-sdk-csharp/master/chuck-icon.png)
 
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
