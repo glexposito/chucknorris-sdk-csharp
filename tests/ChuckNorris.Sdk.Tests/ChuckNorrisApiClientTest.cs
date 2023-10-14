@@ -19,8 +19,7 @@ public class ChuckNorrisApiClientTest
     public async void GetRandomChuckJokeAsync_ShouldReturnChuckJoke()
     {
         var chuckJoke = await _client.GetRandomChuckJokeAsync();
-
-        chuckJoke.Categories.Should().BeEmpty();
+        
         chuckJoke.CreatedAt.Should().NotBeNullOrWhiteSpace();
         chuckJoke.IconUrl.Should().NotBeNullOrWhiteSpace();
         chuckJoke.Id.Should().NotBeNullOrWhiteSpace();

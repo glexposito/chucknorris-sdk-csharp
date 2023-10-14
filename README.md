@@ -6,6 +6,8 @@
 
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
+- [Source code](https://github.com/glexposito/chucknorris-sdk-csharp)
+
 ## Supported Platforms
 
 * .NET 7 or greater
