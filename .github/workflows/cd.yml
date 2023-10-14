@@ -1,0 +1,35 @@
+name: CD
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '7.0.x' ]
+    name: Build & test ${{ matrix.dotnet-version }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET SDK ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test --no-restore
+
+    - name: Publish NuGet package
+      run: |
+        cd .\src\ChuckNorris.Sdk\bin\Release\
+        VAR="$(ls | grep 'nupkg')"
+        dotnet nuget push $VAR --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
