@@ -13,9 +13,9 @@
         <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
         <PackageIcon>chuck-icon.png</PackageIcon>
         <Copyright>Copyright (c) Guillermo Exposito 2023</Copyright>
-        <Version>1.0.3</Version>
-        <AssemblyVersion>1.0.3</AssemblyVersion>
-        <FileVersion>1.0.3</FileVersion>
+        <Version>1.0.4</Version>
+        <AssemblyVersion>1.0.4</AssemblyVersion>
+        <FileVersion>1.0.4</FileVersion>
     </PropertyGroup>
 
 
