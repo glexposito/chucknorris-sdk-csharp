@@ -6,29 +6,77 @@
 
 A C# SDK created for the https://api.chucknorris.io/ API (as a very simple example about "creating a SDK" for a friend who is taking his first steps as a developer).
 
-## Usage examples (work in progress)
-
-Get a random chuck joke.
-
-```c#
-var joke = await client.GetRandomChuckJokeAsync();
-```
-
 ## Supported Platforms
 
 * .NET 7 or greater
 
 ## Getting Started
 
-ChuckNorris C# SDK for .NET will be [available on NuGet](https://www.nuget.org/packages/) soon!
+ChuckNorris C# SDK for .NET is [available on NuGet](https://www.nuget.org/packages/ChuckNorris.Sdk) and it can be installed through the following options:
 
+Package Manager:
+
+	>Install-Package ChuckNorris.Sdk 
+
+.NET CLI:
+
+	>dotnet add package ChuckNorris.Sdk 
+
+Add Chuck Norris Sdk to the container
+```c#
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddChuckNorrisSdk();
 ```
-dotnet add package ChuckNorris.Sdk
+
+## Usage examples
+Get a random chuck joke.
+
+```c#
+using ChuckNorris.Sdk.Client;
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApp.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class ChuckNorrisController : ControllerBase
+{
+    private readonly IChuckNorrisClient _client;
+
+    public ChuckNorrisController(IChuckNorrisClient client)
+    {
+        _client = client;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetRandomJoke()
+    {
+        var joke = await _client.GetRandomChuckJokeAsync();
+
+        return Ok(joke.ChuckJoke!.Value) ;
+    }
+}
 ```
 
-## Documentation
+Get a list of available categories.
 
-Coming soon!
+```c#
+var categories = await client.GetCategoriesAsync();
+```
+
+Get a random chuck joke given a category.
+
+```c#
+var joke = await client.GetChuckJokeByCategoryAsync(category);
+```
+
+Get chuck jokes by using free text search.
+
+```c#
+var joke = await client.SearchChuckJokeByTextAsync(category);
+```
 
 ## Contribute
 
